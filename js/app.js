@@ -17,6 +17,10 @@ Enemy.prototype.update = function(dt) {
     // You should multiply any movement by the dt parameter
     // which will ensure the game runs at the same speed for
     // all computers.
+    const canvasWidth = Number(document.querySelector("canvas").width);
+    if(this.x >= canvasWidth){
+        this.x = -25;
+    }
     this.x += this.speed*dt;
     // this.y += this.speed*sdt;
 
@@ -33,18 +37,16 @@ Enemy.prototype.render = function() {
 // a handleInput() method.
 
 class Player{
-
     constructor(){
-        this.x = 0;
-        this.y = 300;
+        this.x = 200;
+        this.y = 390;
         this.speed = 25;
         this.sprite = 'images/char-horn-girl.png';
     }
 
     update(dt){
-
-        this.x += this.speed*dt;
-        this.y += this.speed*dt;
+        // this.x *=dt;
+        // this.y *=dt;
     }
 
     render(){
@@ -54,22 +56,24 @@ class Player{
     handleInput(keyCode){
       switch (keyCode){
           case 'left':
-          this.x = this.x - (this.speed*dt);
+          if(this.x)
+          this.x = this.x - 101;
           break;
 
           case 'right':
-          this.x = this.x + (this.speed*dt);
+          this.x = this.x + 101;
           break;
 
           case 'up':
-          this.y = this.y + (this.speed*dt);
+          this.y = this.y - 83;
           break;
 
           case 'down':
-          this.y = this.y - (this.speed*dt);
+          this.y = this.y + 83;
           break;
 
       } 
+    //   this.update();
 
     }
 }

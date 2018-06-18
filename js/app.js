@@ -19,7 +19,8 @@ Enemy.prototype.update = function(dt) {
     // all computers.
     const canvasWidth = Number(document.querySelector("canvas").width);
     if(this.x >= canvasWidth){
-        this.x = -25;
+        // this.x = -25;
+        this.x = 0;
     }
     this.x += this.speed*dt;
     // this.y += this.speed*sdt;
@@ -38,9 +39,9 @@ Enemy.prototype.render = function() {
 
 class Player{
     constructor(){
-        this.x = 200;
+        this.x = 202;
         this.y = 390;
-        this.speed = 25;
+        // this.speed = 25;
         this.sprite = 'images/char-horn-girl.png';
     }
 
@@ -54,23 +55,32 @@ class Player{
     }
 
     handleInput(keyCode){
-      switch (keyCode){
-          case 'left':
-          if(this.x)
-          this.x = this.x - 101;
-          break;
+        const canvasWidth = Number(document.querySelector("canvas").width);
+        
+        switch (keyCode){
+            case 'left':
+                if(this.x-101 >= 0){
+                    this.x = this.x - 101;
+                }
+            break;
 
-          case 'right':
-          this.x = this.x + 101;
-          break;
+            case 'right':
+                if(this.x + 101 < canvasWidth){
+                    this.x = this.x + 101;
+                }
+            break;
 
-          case 'up':
-          this.y = this.y - 83;
-          break;
+            case 'up':
+                if(this.y - 83 > -26){
+                    this.y = this.y - 83;
+                }
+            break;
 
-          case 'down':
-          this.y = this.y + 83;
-          break;
+            case 'down':
+                if(this.y + 83 <= 390){
+                    this.y = this.y + 83;
+                }
+            break;
 
       } 
     //   this.update();

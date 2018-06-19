@@ -7,8 +7,8 @@ var Enemy = function() {
     // a helper we've provided to easily load images
     this.sprite = 'images/enemy-bug.png';
     this.x = 0;
-    this.y = 230;
-    this.speed = 70;
+    this.y = 60;
+    this.speed = 150;
 };
 
 // Update the enemy's position, required method for game
@@ -19,11 +19,9 @@ Enemy.prototype.update = function(dt) {
     // all computers.
     const canvasWidth = Number(document.querySelector("canvas").width);
     if(this.x >= canvasWidth){
-        // this.x = -25;
         this.x = 0;
     }
     this.x += this.speed*dt;
-    // this.y += this.speed*sdt;
 
 
 };
@@ -92,13 +90,19 @@ class Player{
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
-var en1 = new Enemy();
-var en2 = new Enemy();
-en2.y-= 90;
-en2.speed+=100;
-var allEnemies = [en1,en2];
+const en1 = new Enemy();
+const en2 = new Enemy();
+const en3 = new Enemy();
 
-var player = new Player();
+//Set position and speeds for enemies
+en2.y += 83;
+en2.speed+=100;
+
+en3.y += 166;
+en3.speed += 150;
+const allEnemies = [en1,en2,en3];
+
+const player = new Player();
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.

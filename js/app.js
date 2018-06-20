@@ -1,35 +1,41 @@
 // Enemies our player must avoid
-var Enemy = function() {
+class Enemy {
     // Variables applied to each of our instances go here,
     // we've provided one for you to get started
 
     // The image/sprite for our enemies, this uses
     // a helper we've provided to easily load images
-    this.sprite = 'images/enemy-bug.png';
-    this.x = 0;
-    this.y = 60;
-    this.speed = 150;
-};
+    constructor(){
+        this.sprite = 'images/enemy-bug.png';
+        this.x = 0;
+        this.y = 60;
+        this.speed = 150;
+    }
 
-// Update the enemy's position, required method for game
-// Parameter: dt, a time delta between ticks
-Enemy.prototype.update = function(dt) {
+    // Update the enemy's position, required method for game
+    // Parameter: dt, a time delta between ticks
+    update(dt) {
     // You should multiply any movement by the dt parameter
     // which will ensure the game runs at the same speed for
     // all computers.
-    const canvasWidth = Number(document.querySelector("canvas").width);
-    if(this.x >= canvasWidth){
-        this.x = 0;
+        const canvasWidth = Number(document.querySelector("canvas").width);
+        if(this.x >= canvasWidth){
+            this.x = 0;
+        }
+        this.x += this.speed*dt;
     }
-    this.x += this.speed*dt;
+    // checkHit(){
 
-
-};
+    //     if(Math.floor(this.x)===player.x){
+    //         console.log(this.y);
+    //     }
+    // }
 
 // Draw the enemy on the screen, required method for game
-Enemy.prototype.render = function() {
-    ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-};
+    render() {
+        ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+    }
+}
 
 // Now write your own player class
 // This class requires an update(), render() and
@@ -39,7 +45,6 @@ class Player{
     constructor(){
         this.x = 202;
         this.y = 390;
-        // this.speed = 25;
         this.sprite = 'images/char-horn-girl.png';
     }
 
@@ -90,9 +95,11 @@ class Player{
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
-const en1 = new Enemy();
-const en2 = new Enemy();
-const en3 = new Enemy();
+let en1 = new Enemy();
+let en2 = new Enemy();
+let en3 = new Enemy();
+let player = new Player();
+let allEnemies = [en1,en2,en3];
 
 //Set position and speeds for enemies
 en2.y += 83;
@@ -100,9 +107,6 @@ en2.speed+=100;
 
 en3.y += 166;
 en3.speed += 150;
-const allEnemies = [en1,en2,en3];
-
-const player = new Player();
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.

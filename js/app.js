@@ -25,11 +25,10 @@ class Enemy {
         }
         this.x += this.speed*dt;
 
-        
-        if((this.x <= player.x + 20 && this.x >= player.x - 20) && (this.y <= player.y + 20 && this.y >= player.y - 20)){
-            console.log(this.name,'hit');
-            console.log('x',this.x,player.x,'y',this.y,player.y)
-
+        //collision detection
+        if((this.x <= player.x + 50 && this.x >= player.x - 50) && (this.y <= player.y + 50 && this.y >= player.y - 50)){
+            player.x = 202;
+            player.y = 390;
         }
     }
 

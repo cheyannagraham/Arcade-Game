@@ -27,8 +27,7 @@ class Enemy {
 
         //collision detection
         if((this.x <= player.x + 50 && this.x >= player.x - 50) && (this.y <= player.y + 50 && this.y >= player.y - 50)){
-            player.x = 202;
-            player.y = 390;
+            reset();
         }
     }
 
@@ -50,9 +49,9 @@ class Player{
     }
 
     update(dt){
-        // this.x *=dt;
-        // this.y *=dt;
-    // console.log(this.x,this.y);
+        if(this.y <= 0){
+            reset();
+        }
 
     }
 
@@ -89,10 +88,13 @@ class Player{
             break;
 
       } 
-    //   this.update();
-
 
     }
+}
+
+function reset(){
+    player.x = 202;
+    player.y = 390;
 }
 
 
@@ -133,5 +135,10 @@ document.addEventListener('keyup', function(e) {
     player.handleInput(allowedKeys[e.keyCode]);
 });
 
-//note, collision doesnt happen bc bug moves like a flip book, so some x coordinates are
-// not reached, just "appear so"
+//add x,y, speed arrays for bugs and gem placement. 
+//create class for gem
+//add text below game for status
+//readme
+// DONE!
+
+

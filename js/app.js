@@ -8,22 +8,22 @@ class Enemy {
     constructor(){
         this.sprite = 'images/enemy-bug.png';
         this.x = 0;
-        //this.y = 60;
         this.y = this.getY();
-        this.speed = 150;
+        this.speed = this.getSpeed();
         this.name='default';
-        console.log('this',this.y)
     }
 
     getY(){
         //return different y position for every instantiated enemy
         let y = [60,143,226];
-        let speed = []
-        let test =  y[Math.floor(Math.random() * Math.floor(y.length))];
-        console.log('test',test)
-        return test;
+        return y[Math.floor(Math.random() * Math.floor(y.length))];
+        //helper code [2018 https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random ]
+    }
 
-        // return y[Math.floor(Math.random() * Math.floor(y.length))];
+    getSpeed(){
+        //return different speed position for every instantiated enemy
+        let speed = [100,200,300];
+        return speed[Math.floor(Math.random() * Math.floor(speed.length))];
         //helper code [2018 https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random ]
     }
 
@@ -36,6 +36,7 @@ class Enemy {
         const canvasWidth = Number(document.querySelector("canvas").width);
         if(this.x >= canvasWidth){
             this.x = 0;
+            this.y = this.getY();
         }
         this.x += this.speed*dt;
 

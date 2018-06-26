@@ -82,6 +82,16 @@ class Gem {
         ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
     }
 
+    update(dt){
+    //collision detection
+        if((this.x <= player.x + 50 && this.x >= player.x - 50) && (this.y <= player.y + 50 && this.y >= player.y - 50)){
+            delete this.sprite;
+            //remove from allgems array
+            let index = allGems.indexOf(this);
+            allGems.splice(index,1);
+        }
+    }
+
 }
 
 // Now write your own player class

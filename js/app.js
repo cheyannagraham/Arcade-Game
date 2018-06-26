@@ -1,3 +1,7 @@
+function randomNumber(array){
+    return array[Math.floor(Math.random() * Math.floor(array.length))];
+}
+
 // Enemies our player must avoid
 class Enemy {
     // Variables applied to each of our instances go here,
@@ -15,15 +19,13 @@ class Enemy {
 
     getY(){
         //return different y position for every instantiated enemy
-        let y = [60,143,226];
-        return y[Math.floor(Math.random() * Math.floor(y.length))];
+        return randomNumber([60,143,226]);
         //helper code [2018 https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random ]
     }
 
     getSpeed(){
         //return different speed position for every instantiated enemy
-        let speed = [100,200,300];
-        return speed[Math.floor(Math.random() * Math.floor(speed.length))];
+        return randomNumber([100,200,300]);
         //helper code [2018 https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random ]
     }
 
@@ -56,14 +58,12 @@ class Enemy {
 class Gem {
     constructor(){
         this.sprite = this.getGemSprite();
-        // this.x = this.getX();
         this.x = this.getX();
         this.y = 200; 
     }
 
     getX(){
-        const x = [0,101,202,303,404];
-        return x[Math.floor(Math.random() * Math.floor(x.length))];
+        return randomNumber([0,101,202,303,404]);
     }
 
     getGemSprite(){
@@ -76,8 +76,7 @@ class Gem {
         'images/Heart.png',
         'images/Key.png'];
 
-        return gemSprites[Math.floor(Math.random() * Math.floor(gemSprites.length))];
-
+        return randomNumber(gemSprites);
     }
     render(){
         ctx.drawImage(Resources.get(this.sprite), this.x, this.y);

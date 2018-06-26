@@ -8,9 +8,23 @@ class Enemy {
     constructor(){
         this.sprite = 'images/enemy-bug.png';
         this.x = 0;
-        this.y = 60;
+        //this.y = 60;
+        this.y = this.getY();
         this.speed = 150;
         this.name='default';
+        console.log('this',this.y)
+    }
+
+    getY(){
+        //return different y position for every instantiated enemy
+        let y = [60,143,226];
+        let speed = []
+        let test =  y[Math.floor(Math.random() * Math.floor(y.length))];
+        console.log('test',test)
+        return test;
+
+        // return y[Math.floor(Math.random() * Math.floor(y.length))];
+        //helper code [2018 https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random ]
     }
 
     // Update the enemy's position, required method for game
@@ -27,7 +41,7 @@ class Enemy {
 
         //collision detection
         if((this.x <= player.x + 50 && this.x >= player.x - 50) && (this.y <= player.y + 50 && this.y >= player.y - 50)){
-            reset();
+            player.reset();
         }
     }
 
@@ -35,6 +49,7 @@ class Enemy {
     render() {
         ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
     }
+
 }
 
 // Now write your own player class
@@ -50,7 +65,7 @@ class Player{
 
     update(dt){
         if(this.y <= 0){
-            reset();
+            this.reset();
         }
 
     }
@@ -90,13 +105,27 @@ class Player{
       } 
 
     }
+
+    reset(){
+        player.x = 202;
+        player.y = 390;
+    }
 }
 
-function reset(){
-    player.x = 202;
-    player.y = 390;
-}
 
+
+const board = {
+    water:[],
+    stone:{
+        first:[],
+        second:[],
+        third:[]
+    },grass:{
+        first:[],
+        second:[]
+    }
+
+}
 
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
@@ -114,11 +143,11 @@ let player = new Player();
 
 
 //Set position and speeds for enemies
-en2.y += 83;
-en2.speed+=100;
+// en2.y += 83;
+// en2.speed+=100;
 
-en3.y += 166;
-en3.speed += 150;
+// en3.y += 166;
+// en3.speed += 150;
 
 let allEnemies = [en1,en2,en3];
 

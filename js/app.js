@@ -132,24 +132,9 @@ const board = {
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
 let en1 = new Enemy();
-en1.name = 'en1';
-
 let en2 = new Enemy();
-en2.name = 'en2';
-
 let en3 = new Enemy();
-en3.name = 'en3';
-
 let player = new Player();
-
-
-//Set position and speeds for enemies
-// en2.y += 83;
-// en2.speed+=100;
-
-// en3.y += 166;
-// en3.speed += 150;
-
 let allEnemies = [en1,en2,en3];
 
 // This listens for key presses and sends the keys to your

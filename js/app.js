@@ -32,6 +32,12 @@ class Enemy {
 
         //collision detection
         if((this.x <= player.x + 50 && this.x >= player.x - 50) && (this.y <= player.y + 50 && this.y >= player.y - 50)){
+            let hits = document.querySelector('#hits');
+            hits.textContent = Number(hits.textContent) + 1;
+            
+            let score = document.querySelector('#score');
+            score.textContent = Number(score.textContent) - 10;
+
             player.reset();
         }
     }
@@ -43,6 +49,15 @@ class Enemy {
 }
 
 class Gem {
+
+    static spawnGems(){
+        Gem.coordinates = {
+            x:[0,101,202,303,404],
+            y:[60,143,226]
+        }
+        return [new Gem(),new Gem(),new Gem()];
+    }
+
     constructor(){
         this.sprite = this.getGemSprite();
         this.x = randomNumber(Gem.coordinates.x);
@@ -70,6 +85,11 @@ class Gem {
     update(dt){
     //collision detection
         if((this.x <= player.x + 50 && this.x >= player.x - 50) && (this.y <= player.y + 50 && this.y >= player.y - 50)){
+            let gems = document.querySelector('#gems');
+            gems.textContent = Number(gems.textContent) + 1;
+            
+            let score = document.querySelector('#score');
+            score.textContent = Number(score.textContent) + 50;
 
             //remove gem from allgems array
             allGems.splice(allGems.indexOf(this),1);
@@ -78,10 +98,10 @@ class Gem {
 
 }
 //coordinates for gems
-Gem.coordinates = {
-    x:[0,101,202,303,404],
-    y:[60,143,226]
-}
+// Gem.coordinates = {
+//     x:[0,101,202,303,404],
+//     y:[60,143,226]
+// }
 
 // Now write your own player class
 // This class requires an update(), render() and
@@ -96,7 +116,16 @@ class Player{
 
     update(){
         if(this.y <= 0){
+            let wins = document.querySelector('#wins');
+            wins.textContent = Number(wins.textContent) + 1;
+            
+            let score = document.querySelector('#score');
+            score.textContent = Number(score.textContent) + 100;
+
             this.reset();
+            allGems = Gem.spawnGems();
+            console.log(allGems)
+
         }
     }
 
@@ -146,7 +175,8 @@ class Player{
 // Place the player object in a variable called player
 let player = new Player();
 let allEnemies = [new Enemy(),new Enemy(),new Enemy()];
-let allGems = [new Gem(),new Gem(),new Gem()];
+let allGems = Gem.spawnGems();
+
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.

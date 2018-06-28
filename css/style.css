@@ -1,3 +1,13 @@
 body {
     text-align: center;
 }
+
+#stats {
+    display: flex;
+    justify-content: center;
+}
+
+.stats-info {
+    /* padding: 10px; */
+    margin: 10px;
+}

@@ -1,5 +1,6 @@
 function randomNumber(array){
     return array[Math.floor(Math.random() * Math.floor(array.length))];
+    //helper code [2018 https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random ]
 }
 
 // Enemies our player must avoid
@@ -12,21 +13,8 @@ class Enemy {
     constructor(){
         this.sprite = 'images/enemy-bug.png';
         this.x = 0;
-        this.y = this.getY();
-        this.speed = this.getSpeed();
-        this.name='default';
-    }
-
-    getY(){
-        //return different y position for every instantiated enemy
-        return randomNumber([60,143,226]);
-        //helper code [2018 https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random ]
-    }
-
-    getSpeed(){
-        //return different speed position for every instantiated enemy
-        return randomNumber([100,200,300]);
-        //helper code [2018 https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random ]
+        this.y = randomNumber([60,143,226]);
+        this.speed = randomNumber([100,200,300]);;
     }
 
     // Update the enemy's position, required method for game
@@ -38,7 +26,7 @@ class Enemy {
         const canvasWidth = Number(document.querySelector("canvas").width);
         if(this.x >= canvasWidth){
             this.x = 0;
-            this.y = this.getY();
+            this.y = randomNumber([60,143,226]);
         }
         this.x += this.speed*dt;
 
@@ -52,32 +40,31 @@ class Enemy {
     render() {
         ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
     }
-
 }
 
 class Gem {
     constructor(){
-        this.sprite = this.getGemSprite();
-        this.x = this.getX();
-        this.y = 200; 
-    }
+        console.log(Gem.coordinates);
 
-    getX(){
-        return randomNumber([0,101,202,303,404]);
-    }
+        this.sprite = this.getGemSprite();
+        this.x = randomNumber(Gem.coordinates.x);
+        this.y = randomNumber(Gem.coordinates.y);
+        Gem.coordinates.x.splice( Gem.coordinates.x.indexOf(this.x),1);
+        Gem.coordinates.y.splice( Gem.coordinates.y.indexOf(this.y),1);
+
+    }  
+
 
     getGemSprite(){
         const gemSprites = ['images/Gem Blue.png',
         'images/Gem Green.png',
         'images/Gem Orange.png',
-        'images/Rock.png',
-        'images/Selector.png',
         'images/Star.png',
-        'images/Heart.png',
-        'images/Key.png'];
+        'images/Heart.png']
 
         return randomNumber(gemSprites);
     }
+
     render(){
         ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
     }
@@ -87,11 +74,14 @@ class Gem {
         if((this.x <= player.x + 50 && this.x >= player.x - 50) && (this.y <= player.y + 50 && this.y >= player.y - 50)){
             delete this.sprite;
             //remove from allgems array
-            let index = allGems.indexOf(this);
-            allGems.splice(index,1);
+            allGems.splice(allGems.indexOf(this),1);
         }
     }
 
+}
+Gem.coordinates = {
+    x:[0,101,202,303,404],
+    y:[60,143,226]
 }
 
 // Now write your own player class
@@ -105,11 +95,10 @@ class Player{
         this.sprite = 'images/char-horn-girl.png';
     }
 
-    update(dt){
+    update(){
         if(this.y <= 0){
             this.reset();
         }
-
     }
 
     render(){
@@ -175,8 +164,7 @@ document.addEventListener('keyup', function(e) {
     player.handleInput(allowedKeys[e.keyCode]);
 });
 
-//add x,y, speed arrays for bugs and gem placement. 
-//create class for gem
+//figure out how to keep gems from being on same square
 //add text below game for status
 //readme
 // DONE!

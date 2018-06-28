@@ -5,6 +5,11 @@ function randomNumber(array){
 
 // Enemies our player must avoid
 class Enemy {
+
+    static spawnEnemy(){
+
+        return [new Enemy(),new Enemy(), new Enemy()];
+    }
     // Variables applied to each of our instances go here,
     // we've provided one for you to get started
 
@@ -14,7 +19,7 @@ class Enemy {
         this.sprite = 'images/enemy-bug.png';
         this.x = 0;
         this.y = randomNumber([60,143,226]);
-        this.speed = randomNumber([100,200,300]);;
+        this.speed = randomNumber([100,200,300,400]);
     }
 
     // Update the enemy's position, required method for game
@@ -36,7 +41,7 @@ class Enemy {
             hits.textContent = Number(hits.textContent) + 1;
             
             let score = document.querySelector('#score');
-            score.textContent = Number(score.textContent) - 10;
+            score.textContent = Number(score.textContent) - 25;
 
             player.reset();
         }
@@ -97,11 +102,6 @@ class Gem {
     }
 
 }
-//coordinates for gems
-// Gem.coordinates = {
-//     x:[0,101,202,303,404],
-//     y:[60,143,226]
-// }
 
 // Now write your own player class
 // This class requires an update(), render() and
@@ -124,8 +124,7 @@ class Player{
 
             this.reset();
             allGems = Gem.spawnGems();
-            console.log(allGems)
-
+            Enemy.spawnEnemy();
         }
     }
 
@@ -174,7 +173,7 @@ class Player{
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
 let player = new Player();
-let allEnemies = [new Enemy(),new Enemy(),new Enemy()];
+let allEnemies = Enemy.spawnEnemy();
 let allGems = Gem.spawnGems();
 
 

@@ -1,5 +1,9 @@
 body {
     text-align: center;
+    background-color: black;
+    color: gray;
+    font-weight: bold;
+    font-size: 1.2em;
 }
 
 #stats {
@@ -8,6 +12,6 @@ body {
 }
 
 .stats-info {
-    /* padding: 10px; */
-    margin: 10px;
+    margin: 5px;
+    padding: 5px;
 }

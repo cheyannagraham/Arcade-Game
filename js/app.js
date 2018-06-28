@@ -44,16 +44,14 @@ class Enemy {
 
 class Gem {
     constructor(){
-        console.log(Gem.coordinates);
-
         this.sprite = this.getGemSprite();
         this.x = randomNumber(Gem.coordinates.x);
         this.y = randomNumber(Gem.coordinates.y);
+
+        //remove coordinate from list so no overlapping gems
         Gem.coordinates.x.splice( Gem.coordinates.x.indexOf(this.x),1);
         Gem.coordinates.y.splice( Gem.coordinates.y.indexOf(this.y),1);
-
     }  
-
 
     getGemSprite(){
         const gemSprites = ['images/Gem Blue.png',
@@ -72,13 +70,14 @@ class Gem {
     update(dt){
     //collision detection
         if((this.x <= player.x + 50 && this.x >= player.x - 50) && (this.y <= player.y + 50 && this.y >= player.y - 50)){
-            delete this.sprite;
-            //remove from allgems array
+
+            //remove gem from allgems array
             allGems.splice(allGems.indexOf(this),1);
         }
     }
 
 }
+//coordinates for gems
 Gem.coordinates = {
     x:[0,101,202,303,404],
     y:[60,143,226]
@@ -132,9 +131,7 @@ class Player{
                     this.y = this.y + 83;
                 }
             break;
-
       } 
-
     }
 
     reset(){
@@ -164,7 +161,6 @@ document.addEventListener('keyup', function(e) {
     player.handleInput(allowedKeys[e.keyCode]);
 });
 
-//figure out how to keep gems from being on same square
 //add text below game for status
 //readme
 // DONE!

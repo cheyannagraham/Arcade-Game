@@ -1,20 +1,16 @@
+//return random element from array
 function randomNumber(array){
     return array[Math.floor(Math.random() * Math.floor(array.length))];
     //helper code [2018 https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random ]
 }
 
-// Enemies our player must avoid
 class Enemy {
 
+    //spawn new enemies when called
     static spawnEnemy(){
-
         return [new Enemy(),new Enemy(), new Enemy()];
     }
-    // Variables applied to each of our instances go here,
-    // we've provided one for you to get started
 
-    // The image/sprite for our enemies, this uses
-    // a helper we've provided to easily load images
     constructor(){
         this.sprite = 'images/enemy-bug.png';
         this.x = 0;
@@ -22,15 +18,12 @@ class Enemy {
         this.speed = randomNumber([100,200,300,400]);
     }
 
-    // Update the enemy's position, required method for game
-    // Parameter: dt, a time delta between ticks
     update(dt) {
-        // You should multiply any movement by the dt parameter
-        // which will ensure the game runs at the same speed for
-        // all computers.
+
         const canvasWidth = Number(document.querySelector("canvas").width);
         if(this.x >= canvasWidth){
             this.x = 0;
+            //change enemy y position when reenter screen
             this.y = randomNumber([60,143,226]);
         }
         this.x += this.speed*dt;
@@ -55,6 +48,7 @@ class Enemy {
 
 class Gem {
 
+    //respawn gems when called
     static spawnGems(){
         Gem.coordinates = {
             x:[0,101,202,303,404],
@@ -102,10 +96,6 @@ class Gem {
     }
 
 }
-
-// Now write your own player class
-// This class requires an update(), render() and
-// a handleInput() method.
 
 class Player{
     constructor(){
@@ -168,14 +158,9 @@ class Player{
     }
 }
 
-
-// Now instantiate your objects.
-// Place all enemy objects in an array called allEnemies
-// Place the player object in a variable called player
 let player = new Player();
 let allEnemies = Enemy.spawnEnemy();
 let allGems = Gem.spawnGems();
-
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
@@ -189,9 +174,3 @@ document.addEventListener('keyup', function(e) {
 
     player.handleInput(allowedKeys[e.keyCode]);
 });
-
-//add text below game for status
-//readme
-// DONE!
-
-

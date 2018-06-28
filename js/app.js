@@ -15,7 +15,7 @@ class Enemy {
         this.sprite = 'images/enemy-bug.png';
         this.x = 0;
         this.y = randomNumber([60,143,226]);
-        this.speed = randomNumber([100,200,300,400]);
+        this.speed = randomNumber([100,150,200,250,300,350,400]);
     }
 
     update(dt) {

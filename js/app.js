@@ -12,10 +12,13 @@ class Enemy {
     }
 
     constructor(){
-        this.sprite = 'images/enemy-bug.png';
+        this.sprite = randomNumber(['images/enemy-bug.png','images/Rock.png']);
         this.x = 0;
         this.y = randomNumber([60,143,226]);
         this.speed = randomNumber([100,150,200,250,300,350,400]);
+        if(this.sprite === 'images/Rock.png'){
+            this.speed = 0;
+        }
     }
 
     update(dt) {
@@ -114,7 +117,7 @@ class Player{
 
             this.reset();
             allGems = Gem.spawnGems();
-            Enemy.spawnEnemy();
+            allEnemies = Enemy.spawnEnemy();
         }
     }
 

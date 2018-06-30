@@ -67,7 +67,7 @@ class Gem {
             }
         }
     }  
-
+    //random gems
     getGemSprite(){
         const gemSprites = ['images/Gem Blue.png',
         'images/Gem Green.png',

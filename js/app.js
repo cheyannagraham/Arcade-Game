@@ -12,13 +12,11 @@ class Enemy {
     }
 
     constructor(){
-        this.sprite = randomNumber(['images/enemy-bug.png','images/Rock.png']);
+        this.sprite ='images/enemy-bug.png';
         this.x = 0;
         this.y = randomNumber([60,143,226]);
-        this.speed = randomNumber([100,150,200,250,300,350,400]);
-        if(this.sprite === 'images/Rock.png'){
-            this.speed = 0;
-        }
+        this.speed = randomNumber([150,200,250,300,350,400]);
+
     }
 
     update(dt) {
@@ -53,21 +51,39 @@ class Gem {
 
     //respawn gems when called
     static spawnGems(){
+        Gem.usedCoordinates = [];
         Gem.coordinates = {
             x:[0,101,202,303,404],
             y:[60,143,226]
         }
-        return [new Gem(),new Gem(),new Gem()];
+        return [new Gem(),new Gem(),new Gem(),new Gem(),new Gem()];
     }
 
     constructor(){
-        this.sprite = this.getGemSprite();
-        this.x = randomNumber(Gem.coordinates.x);
-        this.y = randomNumber(Gem.coordinates.y);
 
-        //remove coordinate from list so no overlapping gems
-        Gem.coordinates.x.splice( Gem.coordinates.x.indexOf(this.x),1);
-        Gem.coordinates.y.splice( Gem.coordinates.y.indexOf(this.y),1);
+        this.sprite = this.getGemSprite();
+        while(true){
+            this.x = randomNumber(Gem.coordinates.x);
+            this.y = randomNumber(Gem.coordinates.y);
+            if(Gem.usedCoordinates.find(item => String(item) == [this.x,this.y])===undefined){
+                Gem.usedCoordinates.push([this.x,this.y]);
+
+                break;
+            }
+        }
+
+        // if(){
+        //     console.log('used');
+        //     this.x = randomNumber(Gem.coordinates.x);
+        //     this.y = randomNumber(Gem.coordinates.y);
+        // }
+        // else{
+        // }
+
+
+        // //remove coordinate from list so no overlapping gems
+        // Gem.coordinates.x.splice( Gem.coordinates.x.indexOf(this.x),1);
+        // Gem.coordinates.y.splice( Gem.coordinates.y.indexOf(this.y),1);
     }  
 
     getGemSprite(){
@@ -75,6 +91,7 @@ class Gem {
         'images/Gem Green.png',
         'images/Gem Orange.png',
         'images/Star.png',
+        'images/Rock.png',
         'images/Heart.png']
 
         return randomNumber(gemSprites);
@@ -87,6 +104,18 @@ class Gem {
     update(dt){
     //collision detection
         if((this.x <= player.x + 50 && this.x >= player.x - 50) && (this.y <= player.y + 50 && this.y >= player.y - 50)){
+            if(this.sprite === 'images/Rock.png'){
+                this.speed = 0;
+                // this.x = randomNumber(Gem.coordinates.x);
+                let hits = document.querySelector('#hits');
+                hits.textContent = Number(hits.textContent) + 1;
+                
+                let score = document.querySelector('#score');
+                score.textContent = Number(score.textContent) - 25;
+    
+                player.reset();
+            }
+            else {
             let gems = document.querySelector('#gems');
             gems.textContent = Number(gems.textContent) + 1;
             
@@ -95,6 +124,7 @@ class Gem {
 
             //remove gem from allgems array
             allGems.splice(allGems.indexOf(this),1);
+            }
         }
     }
 
@@ -162,8 +192,9 @@ class Player{
 }
 
 let player = new Player();
-let allEnemies = Enemy.spawnEnemy();
 let allGems = Gem.spawnGems();
+let allEnemies = Enemy.spawnEnemy();
+
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
@@ -177,3 +208,7 @@ document.addEventListener('keyup', function(e) {
 
     player.handleInput(allowedKeys[e.keyCode]);
 });
+
+//fix rocks and gem overlap
+
+            console.log(Gem.usedCoordinates);

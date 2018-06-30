@@ -52,38 +52,21 @@ class Gem {
     //respawn gems when called
     static spawnGems(){
         Gem.usedCoordinates = [];
-        Gem.coordinates = {
-            x:[0,101,202,303,404],
-            y:[60,143,226]
-        }
         return [new Gem(),new Gem(),new Gem(),new Gem(),new Gem()];
     }
 
     constructor(){
-
         this.sprite = this.getGemSprite();
+
+        //no overlapping gems or rocks
         while(true){
-            this.x = randomNumber(Gem.coordinates.x);
-            this.y = randomNumber(Gem.coordinates.y);
+            this.x = randomNumber([0,101,202,303,404]);
+            this.y = randomNumber([60,143,226]);
             if(Gem.usedCoordinates.find(item => String(item) == [this.x,this.y])===undefined){
                 Gem.usedCoordinates.push([this.x,this.y]);
-
                 break;
             }
         }
-
-        // if(){
-        //     console.log('used');
-        //     this.x = randomNumber(Gem.coordinates.x);
-        //     this.y = randomNumber(Gem.coordinates.y);
-        // }
-        // else{
-        // }
-
-
-        // //remove coordinate from list so no overlapping gems
-        // Gem.coordinates.x.splice( Gem.coordinates.x.indexOf(this.x),1);
-        // Gem.coordinates.y.splice( Gem.coordinates.y.indexOf(this.y),1);
     }  
 
     getGemSprite(){
@@ -106,7 +89,6 @@ class Gem {
         if((this.x <= player.x + 50 && this.x >= player.x - 50) && (this.y <= player.y + 50 && this.y >= player.y - 50)){
             if(this.sprite === 'images/Rock.png'){
                 this.speed = 0;
-                // this.x = randomNumber(Gem.coordinates.x);
                 let hits = document.querySelector('#hits');
                 hits.textContent = Number(hits.textContent) + 1;
                 
@@ -116,14 +98,14 @@ class Gem {
                 player.reset();
             }
             else {
-            let gems = document.querySelector('#gems');
-            gems.textContent = Number(gems.textContent) + 1;
-            
-            let score = document.querySelector('#score');
-            score.textContent = Number(score.textContent) + 50;
+                let gems = document.querySelector('#gems');
+                gems.textContent = Number(gems.textContent) + 1;
+                
+                let score = document.querySelector('#score');
+                score.textContent = Number(score.textContent) + 50;
 
-            //remove gem from allgems array
-            allGems.splice(allGems.indexOf(this),1);
+                //remove gem from allgems array
+                allGems.splice(allGems.indexOf(this),1);
             }
         }
     }

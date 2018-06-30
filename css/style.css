@@ -6,12 +6,27 @@ body {
     font-size: 1.2em;
 }
 
-#stats {
-    display: flex;
-    justify-content: center;
+ul {
+    list-style-type:none;
 }
 
-.stats-info {
-    margin: 5px;
-    padding: 5px;
+#game-info {
+    width: 50%;
+}
+
+#content{
+    width:100%;
+    display:flex;
+    flex-wrap:wrap;
+}
+
+#stats-list{
+    display:flex;
+    justify-content:center;
+    color:Orange
+}
+
+.stats-info{
+    margin:5px;
+    padding:5px;
 }

@@ -7,19 +7,42 @@
 </head>
 <body>
 
-    <h1>Game</h1>
+    <h1>Arcade Game</h1> 
 
-    <div id='stats'>
-        <p>Gems: <span class="stats-info"id="gems">0</span></p>
-        <p>Hits: <span class="stats-info"id="hits">0</span></p>
-        <p>Wins: <span class="stats-info"id="wins">0</span></p>
-        <p>Score: <span class="stats-info" id="score">0</span></p>
-    </div>
+    <div id="content">
+    
+        <div id="game-info">
+
+            <h2>Instructions</h2>
+            <ul>
+                <li class="info-list-item">Use arrow keys to move Player</li>
+                <li class="info-list-item">Avoid Rocks and Bugs</li>
+                <li class="info-list-item">Collect Gems for extra points</li>
+                <li class="info-list-item">Game is won when Player reaches water</li>
+            </ul>
+
+            <h2>Score</h2>
+            <ul>
+                <li>Gems + 50pts</li>
+                <li>Hits - 25pts</li>
+                <li>Reach Water + 100pts</li>
+            </ul>
+
+            <h2>Stats</h2>
+            <ul id="stats-list">
+                <li>Gems: <span class="stats-info"id="gems">0</span></li>
+                <li>Hits: <span class="stats-info"id="hits">0</span></li>
+                <li>Wins: <span class="stats-info"id="wins">0</span></li>
+                <li>Score: <span class="stats-info" id="score">0</span></li>
+            </ul>
+        </div>
+
+        <canvas></canvas>
+    </div> 
 
     <script src="js/resources.js"></script>
     <script src="js/app.js"></script>
-    <script src="js/engine.js"></script>
- 
+    <script src="js/engine.js"></script> 
 
 
 </body>

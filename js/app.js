@@ -6,7 +6,7 @@ function randomNumber(array){
 
 class Enemy {
 
-    //spawn new enemies when called
+    //Create enemy instances
     static spawnEnemy(){
         return [new Enemy(),new Enemy(), new Enemy()];
     }
@@ -16,7 +16,6 @@ class Enemy {
         this.x = 0;
         this.y = randomNumber([60,143,226]);
         this.speed = randomNumber([150,200,250,300,350,400]);
-
     }
 
     update(dt) {
@@ -49,7 +48,7 @@ class Enemy {
 
 class Gem {
 
-    //respawn gems when called
+    //Create gem instances
     static spawnGems(){
         Gem.usedCoordinates = [];
         return [new Gem(),new Gem(),new Gem(),new Gem(),new Gem()];
@@ -87,6 +86,7 @@ class Gem {
     update(dt){
     //collision detection
         if((this.x <= player.x + 50 && this.x >= player.x - 50) && (this.y <= player.y + 50 && this.y >= player.y - 50)){
+            //treat rock as enemy
             if(this.sprite === 'images/Rock.png'){
                 this.speed = 0;
                 let hits = document.querySelector('#hits');
@@ -104,7 +104,7 @@ class Gem {
                 let score = document.querySelector('#score');
                 score.textContent = Number(score.textContent) + 50;
 
-                //remove gem from allgems array
+                //Remove collected gems from screen
                 allGems.splice(allGems.indexOf(this),1);
             }
         }
@@ -190,7 +190,3 @@ document.addEventListener('keyup', function(e) {
 
     player.handleInput(allowedKeys[e.keyCode]);
 });
-
-//fix rocks and gem overlap
-
-            console.log(Gem.usedCoordinates);

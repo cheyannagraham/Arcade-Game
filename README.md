@@ -6,7 +6,7 @@ The game can be played by loading the ***index.html*** file into your browser
 
 ## Website
 
-The game is also playable [here]()
+The game is also playable [here]( https://cheyannagraham.github.io/Arcade-Game/)
 
 # How To Play
 

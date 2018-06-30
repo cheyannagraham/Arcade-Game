@@ -17,3 +17,7 @@ The game is also playable [here]( https://cheyannagraham.github.io/Arcade-Game/)
 ## Collectibles
 
 Gems, hearts and stars are collectibles. They will add 50 points to your score!
+
+## Earn a Win
+
+Once a win is earned, the enemies and gems will respawn

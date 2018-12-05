@@ -1,6 +1,9 @@
 # How To Run
 
 ## Clone/Download
+1. Download or clone the game
+2. Open `index.html` inside your browser
+3. Play!
 
 The game can be played by loading the ***index.html*** file into your browser
 
